@@ -15,20 +15,22 @@
       url: $this.attr('action'),
       data: {},
       beforeSubmit: function() {},
+      beforeLoad: function() {},
       afterLoad: function() {},
       parseURL: true,
       parseMap: {},
-      target: $this
+      target: undefined
     }, options);
 
     var self = this;
     self.beforeSubmit = [ opts.beforeSubmit ];
+    self.beforeLoad = [ opts.beforeLoad ];
     self.onLoad = [ opts.afterLoad ];
 
     $this.submit(function(event) {
       event.preventDefault();
 
-      self.load(opts.target, opts);
+      self.load(opts);
     });
   }
 
@@ -76,7 +78,7 @@
     return route;
   }
 
-  AjaxLoader.prototype.load = function(target, options) {
+  AjaxLoader.prototype.load = function(options) {
     var self = this;
     var opts = $.extend({
       error: function() {}
@@ -98,12 +100,23 @@
       url: opts.url,
       data: opts.data,
       success: function(data) {
-        target.html(data);
+        for (var i = 0; i < self.beforeLoad.length; i++) {
+          var before = self.beforeLoad[i];
 
-        for (var i = 0; i < self.onLoad.length; i++) {
-          var fn = self.onLoad[i];
+          if (before(data) === false) {
+            return false;
+          }
+        }
 
-          fn(data);
+        var target = opts.target;
+        if (target) {
+          target.html(data);
+
+          for (var j = 0; j < self.onLoad.length; j++) {
+            var after = self.onLoad[j];
+
+            after(data);
+          }
         }
       },
       error: function(err) {
