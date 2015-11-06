@@ -4,6 +4,7 @@
  * Author: Bremen Braun
  */
 ;(function($) {
+  'use strict';
 
   function AjaxLoader($this, options) {
     if ($this.prop('tagName').toLowerCase() !== 'form') {
@@ -115,4 +116,3 @@
     return new AjaxLoader(this, opts);
   };
 }(jQuery));
-

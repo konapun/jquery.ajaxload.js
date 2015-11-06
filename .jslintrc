@@ -1,0 +1,10 @@
+{
+  "globals": {
+    "jQuery": false
+  },
+  "predef": [
+    "jQuery",
+    "$"
+  ],
+  "quotmark": true
+}

@@ -12,11 +12,11 @@ Here's your HTML...
 ```html
 <div class="well">
   <div id="ajax-content"></div>
-  
+
   <form id="ajax-trigger" action="/search/[#field1]/[#field2]">
     Field1: <input id="field1" type="text">
     Field2: <input id="field2" type="text">
-    
+
     <button type="submit">Submit</button>
   </form>
 </div>
@@ -52,3 +52,9 @@ $('#ajax-trigger').ajaxLoad({
 
 If you do not provide a parseMap, placeholders in the URL will be treated as
 jQuery selectors.
+
+## Options
+  * **url** [*default: the form's URL*]: Set the URL to submit the AJAX request to
+  * **data** [*default: {}*]: Data to be POSTed to the URL
+  * **beforeSubmit** [*default: []*]: An array of functions to be run before the AJAX call is made. If any of these functions return false, the action is halted
+  *
