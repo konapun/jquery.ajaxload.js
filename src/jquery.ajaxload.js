@@ -91,7 +91,7 @@
     for (var i = 0; i < self.beforeSubmit.length; i++) {
       var fn = self.beforeSubmit[i];
 
-      if (fn(opts.url) === false) {
+      if (fn.call(self, opts.url) === false) {
         return false;
       }
     }
@@ -103,7 +103,7 @@
         for (var i = 0; i < self.beforeLoad.length; i++) {
           var before = self.beforeLoad[i];
 
-          if (before(data) === false) {
+          if (before.call(self, data) === false) {
             return false;
           }
         }
@@ -115,12 +115,12 @@
           for (var j = 0; j < self.onLoad.length; j++) {
             var after = self.onLoad[j];
 
-            after(data);
+            after.call(self, data);
           }
         }
       },
       error: function(err) {
-        opts.error(err);
+        opts.error.call(self, err);
       }
     });
   };
