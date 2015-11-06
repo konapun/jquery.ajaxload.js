@@ -7,7 +7,7 @@ var rename = require('gulp-rename');
 gulp.task('minify', function() {
   return gulp.src('src/*.js')
     .pipe(uglify())
-    .pipe(rename({ suffix: '.min.js' }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist'))
     .pipe(notify({
       message: 'Finished minifying'
