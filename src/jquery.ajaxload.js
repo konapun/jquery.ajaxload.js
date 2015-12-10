@@ -96,9 +96,19 @@
       }
     }
 
+    // data may contain functions for delayed computations
+    var data = {};
+    for (var key in opts.data) {
+      var val = opts.data[key];
+
+      if (val.prototype) { // if it has a prototype, assume it's a function (There's probably a better way to do this though)
+        val = val();
+      }
+      data[key] = val;
+    }
     $.ajax({
       url: opts.url,
-      data: opts.data,
+      data: data,
       success: function(data) {
         for (var i = 0; i < self.beforeLoad.length; i++) {
           var before = self.beforeLoad[i];
