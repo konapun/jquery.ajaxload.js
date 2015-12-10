@@ -56,7 +56,7 @@ jQuery selectors.
 ## Options
   * **target** [default: *undefined*]: The target in which to insert the resulting data from the AJAX call. If no target is given, the content isn't loaded.
   * **url** [default: *the form's URL*]: Set the URL to submit the AJAX request to
-  * **data** [default: *{}*]: Data to be POSTed to the URL
+  * **data** [default: *{}*]: Data to be POSTed to the URL. Data values can be functions in case delayed computations are needed
   * **beforeSubmit** [default: *function(url) {}*]: A function to be run before the AJAX call is made. If any of these functions return false, the action is halted
   * **beforeLoad** [default: *function(data) {}*]: A function to be run once the AJAX call has succeeded but before loading the data into the target. This function is run regardless of whether or not a target is given
   * **afterLoad** [default: *function() {}*]: A function to be run once the content from the AJAX call is loaded into the target. Note that if no target is given, this function will never be run
